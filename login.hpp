@@ -1,6 +1,7 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 #include <string>
+#include <vector>
 
     class User{
     public:
@@ -43,15 +44,15 @@
     public:
 
         void createUser(std::string& name, std::string& password, 
-            std::string& question, std::string& answer);
-        bool editUser();
+            std::string& email, std::string& question, std::string& answer);
+        bool editUser(std::string& name);
         void showUser(std::string& name);
         bool login(std::string& name, std::string& password);
         bool logout();
         bool forgotpassword(std::string& name, std::string& password);
     
     private:
-    
+        std::vector<User> _users;
     };
 
 #endif
