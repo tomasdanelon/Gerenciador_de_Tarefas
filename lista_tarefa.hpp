@@ -1,7 +1,15 @@
-#ifndef LISTATAREFA_H
-#define LISTATAREFA_H
+#ifndef TASKMANAGER_H
+#define TASKMANAGER_H
 
-    class ListaTarefa{
+    class Task{
+    public:
+        
+    
+    private:
+    
+    };
+    
+    class TaskManager{
     public:
     
     private:
