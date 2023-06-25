@@ -2,61 +2,39 @@
 #define LOGIN_H
 #include <string>
 #include <map>
-#include "password_hasher.hpp"
+#include <algorithm>
+#include "user.hpp"
 
-class User{
+class LoginSystem{
     public:
-        User(const std::string& password, const std::string& email,
-            const std::string& question, const std::string& answer) 
-            : _password(passwordHash(calcularHash(password))), _email(email), 
-            _question(question), _answer(answer) {}
+        LoginSystem()=default; // Construtor
 
-        const std::string& getPassword() const {
-            return _password;
-        }
+        bool createUser(const std::string& username, const std::string& password,
+                        const std::string& email, const std::string& question,
+                        const std::string& answer);
 
-        const std::string& getEmail() const {
-            return _email;
-        }
+        bool login(const std::string& email, const std::string& password);
 
-        const std::string& getQuestion() const {
-            return _question;
-        }
-
-        const std::string& getAnswer() const {
-            return _answer;
-        }
-    
-    private:
-        std::string _password;
-        std::string _email;
-        std::string _question;
-        std::string _answer;
-};
-
-class Login{
-    public:
-        LoginSystem();  // Construtor
-        bool login(std::string& email, std::string& password);
         bool logout();
-        void createUser(std::string& username, std::string& password, 
-            std::string& email, std::string& question, 
-            std::string& answer);
+
+        bool showUser();
+
         bool editUser();
-        void showUser();
-        void deleteUser(std::string& username);
-        bool forgotpassword(std::string& email);
+
+        bool deleteUser(const std::string& username, const std::string& password,
+                        const std::string& email, const std::string& question,
+                        const std::string& answer);
+
+        bool forgotpassword(const std::string& email);
 
         std::string getUsername() const {
             return currentUsername;
         }
     
     private:
-        std::string currentUsername;
+        std::map<std::string, User> _users;
         bool isLoggedIn;
-        std::map<string, User> _users;
+        std::string currentUsername;
 };
 
-class Arquivo{
-
-}
+#endif
