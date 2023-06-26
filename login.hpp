@@ -3,11 +3,12 @@
 #include <string>
 #include <map>
 #include <algorithm>
+#include <regex>
 #include "user.hpp"
 
 class LoginSystem{
     public:
-        LoginSystem()=default; // Construtor
+        LoginSystem() : isLoggedIn(false) {} // Construtor
 
         bool createUser(const std::string& username, const std::string& password,
                         const std::string& email, const std::string& question,
@@ -19,13 +20,15 @@ class LoginSystem{
 
         bool showUser();
 
-        bool editUser();
+        bool editUser(const std::string& password, const int& choice, 
+                      const std::string& change1, const std::string& change2);
 
         bool deleteUser(const std::string& username, const std::string& password,
-                        const std::string& email, const std::string& question,
-                        const std::string& answer);
+                        const std::string& email, const std::string& answer,
+                        const std::string& confirmation);
 
-        bool forgotpassword(const std::string& email);
+        bool forgotPassword(const std::string& email, const std::string& answer, 
+                            const std::string& newPassword);
 
         std::string getUsername() const {
             return currentUsername;
