@@ -32,6 +32,8 @@ class LoginSystem{
 
         User* findUserByUsername(const std::string& username);
 
+        bool checkLength(const int MaxLength, const std::string& field);
+
         std::string getUsername() const {
             return currentUsername;
         }

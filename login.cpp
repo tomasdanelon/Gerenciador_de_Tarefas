@@ -11,6 +11,10 @@ User* LoginSystem::findUserByUsername(const std::string& username) {
     }
 }
 
+bool LoginSystem::checkLength(const int MaxLength, const std::string& field){
+    return field.length() > MaxLength;
+}
+
 bool LoginSystem::createUser(const std::string& username, const std::string& password,
                         const std::string& email, const std::string& question,
                         const std::string& answer){
@@ -35,37 +39,22 @@ bool LoginSystem::createUser(const std::string& username, const std::string& pas
         return false;
     }
 
-     // Verificação de limite de caracteres
-    constexpr int kUsernameMaxLength = 10;
-    constexpr int kPasswordMaxLength = 15;
-    constexpr int kEmailMaxLength = 50;
-    constexpr int kQuestionMaxLength = 100;
-    constexpr int kAnswerMaxLength = 50;
-
-    if (username.length() > kUsernameMaxLength) {
-        std::cout << "Nome de usuário excede o limite de " << kUsernameMaxLength << " caracteres.\n";
-        return false;
-    }
-
-    if (password.length() > kPasswordMaxLength) {
-        std::cout << "Senha excede o limite de " << kPasswordMaxLength << " caracteres.\n";
-        return false;
-    }
-
-    if (email.length() > kEmailMaxLength) {
-        std::cout << "Email excede o limite de " << kEmailMaxLength << " caracteres.\n";
-        return false;
-    }
-
-    if (question.length() > kQuestionMaxLength) {
-        std::cout << "Pergunta de segurança excede o limite de " << kQuestionMaxLength << " caracteres.\n";
-        return false;
-    }
-
-    if (answer.length() > kAnswerMaxLength) {
-        std::cout << "Resposta de segurança excede o limite de " << kAnswerMaxLength << " caracteres.\n";
-        return false;
-    }
+    // Verificação de limite de caracteres
+    if(LoginSystem::checkLength(10, username) == true){
+        std::cout << "Nome de usuário excede o limite de caracteres." << std::endl;
+        return false;}
+    if(LoginSystem::checkLength(15, password) == true){
+        std::cout << "Senha excede o limite de caracteres." << std::endl;
+        return false;}
+    if(LoginSystem::checkLength(50, email) == true){
+        std::cout << "Email excede o limite de caracteres." << std::endl;
+        return false;}
+    if(LoginSystem::checkLength(100, question) == true){
+        std::cout << "Pergunta excede o limite de caracteres." << std::endl;
+        return false;}
+    if(LoginSystem::checkLength(50, answer) == true){
+        std::cout << "Resposta excede o limite de caracteres." << std::endl;
+        return false;}
 
     //Verifica se o email possui @ e um ponto no final 
     if (email.find('@') == std::string::npos || !std::regex_match(email, std::regex(".+\\..+"))) {
@@ -182,7 +171,7 @@ bool LoginSystem::editUser(const std::string& password, const int& choice, const
                 break;
             }
 
-            _users[currentUsername].setPassword(change1);
+            _users[currentUsername].setPassword(PasswordHasher::calcularHash(change1));
 
             std::cout << "Senha alterada com sucesso para o usuário " << currentUsername << "." << std::endl;
             break;
@@ -298,7 +287,7 @@ bool LoginSystem::forgotPassword(const std::string& username, const std::string&
     std::cin >> newPassword;*/
 
     // Atualizar a senha do usuário
-    user->setPassword(newPassword);
+    user->setPassword(PasswordHasher::calcularHash(newPassword));
 
     std::cout << "Senha atualizada com sucesso." << std::endl;
     return true;

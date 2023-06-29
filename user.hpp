@@ -29,7 +29,11 @@ class User{
         }
 
         void setPassword(const std::string& password) {
-            _password = PasswordHasher::calcularHash(password);
+            _password = password;
+        }
+
+        void setEmail(const std::string& email) {
+            _email = email;
         }
 
         void setQuestion(const std::string& question) {

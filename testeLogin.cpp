@@ -7,7 +7,6 @@
 
 TEST_CASE("Teste da classe Login") {
     LoginSystem log_in;
-    std::cout << "\nTestando forgotPassword\n\n";
     std::string username = "anaC";
     std::string password = "123456";
     std::string email = "anaC@example.com";
@@ -16,13 +15,6 @@ TEST_CASE("Teste da classe Login") {
 
     // Teste da função createUser
     SUBCASE("Teste da função createUser") {
-        std::cout << "\nTestando criação\n\n";
-        std::string username = "anaC";
-        std::string password = "123456";
-        std::string email = "anaC@example.com";
-        std::string question = "Qual é o nome do seu animal de estimação?";
-        std::string answer = "Rex";
-
         CHECK(log_in.createUser(username, password, email, question, answer) == true);
         CHECK(log_in.createUser(username, password, email, question, answer) == false); // Usuário já existe
         
@@ -34,6 +26,7 @@ TEST_CASE("Teste da classe Login") {
         CHECK(log_in.createUser(username, password, email, question, "") == false);
     }
 
+    // Cria o Usuário após para o teste de createUser ser bem sucedido
     log_in.createUser(username, password, email, question, answer);
 
     // Teste da função login
