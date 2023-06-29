@@ -2,6 +2,15 @@
 #include <algorithm>
 #include <iostream>
 
+User* LoginSystem::findUserByUsername(const std::string& username) {
+    auto it = _users.find(username);
+    if (it != _users.end()) {
+        return &(it->second);
+    } else {
+        return nullptr; // Usuário não encontrado
+    }
+}
+
 bool LoginSystem::createUser(const std::string& username, const std::string& password,
                         const std::string& email, const std::string& question,
                         const std::string& answer){
@@ -75,31 +84,25 @@ bool LoginSystem::createUser(const std::string& username, const std::string& pas
     return true;
 }
 
-bool LoginSystem::login(const std::string& email, const std::string& password){
+bool LoginSystem::login(const std::string& username, const std::string& password){
     // Verificar se já existe um usuário logado
     if (isLoggedIn) {
         std::cout << "Já existe um usuário logado. Faça logout!!\n";
         return false;
     }
 
-    // Procurar o usuário pelo email
-    auto it = std::find_if(_users.begin(), _users.end(),
-    [&](const auto& userPair) {
-        return userPair.second.getEmail() == email;
-    });
+    // Procurar usuário pelo username e obter objeto
+    User* user = LoginSystem::findUserByUsername(username);
 
-    // Verificar se o usuário foi encontrado
-    if (it == _users.end()) {
-        std::cout << "Usuário não encontrado.\n";
+    // Caso não encontre
+    if(user == nullptr){
+        std::cout << "Usuário não encontrado" << std::endl;
         return false;
     }
 
-    // Obter o objeto User correspondente ao email
-    const User& user = it->second;
-
     // Comparar a senha fornecida com a senha do usuário
-    if ((PasswordHasher::calcularHash(password)) == user.getPassword()) {
-        currentUsername = it->first;  // Definir o nome de usuário atual
+    if ((PasswordHasher::calcularHash(password)) == user->getPassword()) {
+        currentUsername = username;  // Definir o nome de usuário atual
         isLoggedIn = true;
         std::cout << "Login bem-sucedido. Bem-vindo, " << currentUsername << "!\n";
         return true;
@@ -262,22 +265,19 @@ bool LoginSystem::deleteUser(const std::string& username, const std::string& pas
     return true;
 }
 
-bool LoginSystem::forgotPassword(const std::string& email, const std::string& answer, const std::string& newPassword){
+bool LoginSystem::forgotPassword(const std::string& username, const std::string& answer, const std::string& newPassword){
     // Verificar se o usuário está logado
     if (isLoggedIn) {
         std::cout << "Você já está logado. Faça logout antes de esquecer a senha." << std::endl;
         return false;
     }
 
-    // Verificar se o e-mail informado corresponde a algum usuário
-    std::map<std::string, User>::iterator it = std::find_if(_users.begin(), _users.end(),
-        [&](const std::pair<std::string, User>& userPair) {
-            return userPair.second.getEmail() == email;
-        }
-    );  
+    // Procurar usuário pelo username e obter objeto
+    User* user = LoginSystem::findUserByUsername(username);
 
-    if (it == _users.end()) {
-        std::cout << "O e-mail informado não está registrado." << std::endl;
+    // Caso não encontre
+    if(user == nullptr){
+        std::cout << "Usuário não encontrado" << std::endl;
         return false;
     }
 
@@ -287,8 +287,7 @@ bool LoginSystem::forgotPassword(const std::string& email, const std::string& an
     std::cin >> answer;*/
 
     // Verificar se a resposta está correta
-    if (answer != it->second.getAnswer()) {
-        std::cout << it->second.getAnswer() << std::endl;
+    if (answer != user->getAnswer()) {
         std::cout << "Resposta incorreta." << std::endl;
         return false;
     }
@@ -299,7 +298,7 @@ bool LoginSystem::forgotPassword(const std::string& email, const std::string& an
     std::cin >> newPassword;*/
 
     // Atualizar a senha do usuário
-    it->second.setPassword(newPassword);
+    user->setPassword(newPassword);
 
     std::cout << "Senha atualizada com sucesso." << std::endl;
     return true;

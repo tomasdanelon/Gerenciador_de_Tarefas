@@ -14,7 +14,7 @@ class LoginSystem{
                         const std::string& email, const std::string& question,
                         const std::string& answer);
 
-        bool login(const std::string& email, const std::string& password);
+        bool login(const std::string& username, const std::string& password);
 
         bool logout();
 
@@ -27,8 +27,10 @@ class LoginSystem{
                         const std::string& email, const std::string& answer,
                         const std::string& confirmation);
 
-        bool forgotPassword(const std::string& email, const std::string& answer, 
+        bool forgotPassword(const std::string& username, const std::string& answer, 
                             const std::string& newPassword);
+
+        User* findUserByUsername(const std::string& username);
 
         std::string getUsername() const {
             return currentUsername;

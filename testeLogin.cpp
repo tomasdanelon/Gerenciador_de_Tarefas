@@ -7,6 +7,12 @@
 
 TEST_CASE("Teste da classe Login") {
     LoginSystem log_in;
+    std::cout << "\nTestando forgotPassword\n\n";
+    std::string username = "anaC";
+    std::string password = "123456";
+    std::string email = "anaC@example.com";
+    std::string question = "Qual é o nome do seu animal de estimação?";
+    std::string answer = "Rex";
 
     // Teste da função createUser
     SUBCASE("Teste da função createUser") {
@@ -28,37 +34,25 @@ TEST_CASE("Teste da classe Login") {
         CHECK(log_in.createUser(username, password, email, question, "") == false);
     }
 
+    log_in.createUser(username, password, email, question, answer);
+
     // Teste da função login
     SUBCASE("Teste da função login") {
-        std::cout << "\nTestando login\n\n";
-        std::string username = "anaC";
-        std::string password = "123456";
-        std::string email = "anaC@example.com";
-        std::string question = "Qual é o nome do seu animal de estimação?";
-        std::string answer = "Rex";
-        log_in.createUser(username, password, email, question, answer);
-
-        CHECK(log_in.login(email, password) == true);
-        CHECK(log_in.login(email, "wrong_password") == false); // Senha incorreta
-        CHECK(log_in.login("nonexistent@example.com", password) == false); // Usuário não encontrado
+        CHECK(log_in.login(username, password) == true); // Teste comum
+        log_in.logout();
+        CHECK(log_in.login(username, "wrong_password") == false); // Senha incorreta
+        log_in.logout();
+        CHECK(log_in.login("nonexistent", password) == false); // Usuário não encontrado
 
         // Teste com usuário já logado
-        CHECK(log_in.login("another@example.com", "another_password") == false); // Já existe um usuário logado
+        CHECK(log_in.login("another", "another_password") == false); // Já existe um usuário logado
     }
 
     // Teste da função logout
     SUBCASE("Teste da função logout") {
-        std::cout << "\nTestando logout\n\n";
-        std::string username = "anaC";
-        std::string password = "123456";
-        std::string email = "anaC@example.com";
-        std::string question = "Qual é o nome do seu animal de estimação?";
-        std::string answer = "Rex";
-        log_in.createUser(username, password, email, question, answer);
-
         CHECK(log_in.logout() == false); // Nenhum usuário está logado
 
-        CHECK(log_in.login(email, password) == true);
+        CHECK(log_in.login(username, password) == true);
 
         CHECK(log_in.logout() == true);
         CHECK(log_in.logout() == false); // Nenhum usuário está logado
@@ -66,17 +60,9 @@ TEST_CASE("Teste da classe Login") {
 
     // Teste da função showUser
     SUBCASE("Teste da função showUser") {
-        std::cout << "\nTestando showUser\n\n";
-        std::string username = "anaC";
-        std::string password = "123456";
-        std::string email = "anaC@example.com";
-        std::string question = "Qual é o nome do seu animal de estimação?";
-        std::string answer = "Rex";
-        log_in.createUser(username, password, email, question, answer);
-
         CHECK(log_in.showUser() == false); // Nenhum usuário está logado
 
-        CHECK(log_in.login(email, password) == true);
+        CHECK(log_in.login(username, password) == true);
 
         CHECK(log_in.showUser() == true);
         CHECK(log_in.logout() == true);
@@ -85,19 +71,11 @@ TEST_CASE("Teste da classe Login") {
 
     // Teste da função editUser
     SUBCASE("Teste da função editUser") {
-        std::cout << "\nTestando editUser\n\n";
-        std::string username = "anaC";
-        std::string password = "123456";
-        std::string email = "anaC@example.com";
-        std::string question = "Qual é o nome do seu animal de estimação?";
-        std::string answer = "Rex";
-        log_in.createUser(username, password, email, question, answer);
-
         int choice = 1;
 
         CHECK(log_in.editUser(password, choice, "123456", "0") == false); // Nenhum usuário está logado
 
-        CHECK(log_in.login(email, password) == true);
+        CHECK(log_in.login(username, password) == true);
 
         CHECK(log_in.editUser(password, choice, password, "0") == true);
         choice = 2;
@@ -108,19 +86,11 @@ TEST_CASE("Teste da classe Login") {
     }
 
     // Teste da função deleteUser
-    SUBCASE("Teste da função deleteUser") {
-        std::cout << "\nTestando deleteUser\n\n";
-        std::string username = "anaC";
-        std::string password = "123456";
-        std::string email = "anaC@example.com";
-        std::string question = "Qual é o nome do seu animal de estimação?";
-        std::string answer = "Rex";
-        log_in.createUser(username, password, email, question, answer);
-        
-        CHECK(log_in.login(email, password) == true);
+    SUBCASE("Teste da função deleteUser") {        
+        CHECK(log_in.login(username, password) == true);
 
         CHECK(log_in.deleteUser(username, password, email, answer, "DELETAR") == true);
-        CHECK(log_in.login(email, password) == false); // Usuário foi excluído
+        CHECK(log_in.login(username, password) == false); // Usuário foi excluído
 
         // Tentativa de excluir um usuário inexistente
         CHECK(log_in.deleteUser(username, password, email, answer, "DELETAR") == false);
@@ -128,19 +98,11 @@ TEST_CASE("Teste da classe Login") {
 
     // Teste da função forgotPassword
     SUBCASE("Teste da função forgotPassword") {
-        std::cout << "\nTestando forgotPassword\n\n";
-        std::string username = "anaC";
-        std::string password = "123456";
-        std::string email = "anaC@example.com";
-        std::string question = "Qual é o nome do seu animal de estimação?";
-        std::string answer = "Rex";
-        log_in.createUser(username, password, email, question, answer);
-
-        CHECK(log_in.forgotPassword(email, "Rex", "123456") == true); // Alteração de senha bem-sucedida
-        CHECK(log_in.login(email, password) == true); // Login com a nova senha bem-sucedido
+        CHECK(log_in.forgotPassword(username, "Rex", "123456") == true); // Alteração de senha bem-sucedida
+        CHECK(log_in.login(username, password) == true); // Login com a nova senha bem-sucedido
 
         log_in.logout();
         // Tentativa de alterar a senha com resposta incorreta à pergunta de segurança
-        CHECK(log_in.forgotPassword(email, "Re", "123456") == false);
+        CHECK(log_in.forgotPassword(username, "Re", "123456") == false);
     }
 }
