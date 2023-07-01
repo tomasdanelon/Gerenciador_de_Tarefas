@@ -68,6 +68,10 @@ bool LoginSystem::createUser(const std::string& username, const std::string& pas
     //Adiciona o user ao map
     _users.emplace(username, newUser);
 
+    //Salvar o usuario
+    SaveFile saveFile("user_data.txt");
+    saveFile.save(*this);
+
     //Confirmação da criação
     std::cout << "Novo usuário criado com sucesso.\n";
     return true;
@@ -207,11 +211,14 @@ bool LoginSystem::editUser(const std::string& password, const int& choice, const
             _users[currentUsername].setQuestion(change1);
             _users[currentUsername].setAnswer(change2);
 
+            //Salvar as edições
+            SaveFile saveFile("user_data.txt");
+            saveFile.save(*this);
+
             std::cout << "Pergunta de segurança e resposta alteradas com sucesso para o usuário " << currentUsername << "." << std::endl;
             break;
         }
     }
-
     return true;
 }
 
@@ -251,6 +258,11 @@ bool LoginSystem::deleteUser(const std::string& username, const std::string& pas
 
     std::cout << "Usuário " << currentUsername <<" excluído com sucesso." << std::endl;
     currentUsername.clear();
+
+    //Salvar a exclusão
+    SaveFile saveFile("user_data.txt");
+    saveFile.save(*this);
+
     return true;
 }
 
@@ -289,7 +301,78 @@ bool LoginSystem::forgotPassword(const std::string& username, const std::string&
     // Atualizar a senha do usuário
     user->setPassword(PasswordHasher::calcularHash(newPassword));
 
+    //Salvar a mudança
+    SaveFile saveFile("user_data.txt");
+    saveFile.save(*this);
+
     std::cout << "Senha atualizada com sucesso." << std::endl;
     return true;
 }
 
+bool SaveFile::save(LoginSystem& login) {
+    std::ofstream file("users_data.txt");
+    if (file.is_open()) {
+        for (const auto& pair : login._users) {
+            const std::string& username = pair.first;
+            const User& user = pair.second;
+
+            file << "Username: " << username << std::endl;
+            file << "Password: " << user.getPassword() << std::endl;
+            file << "Email: " << user.getEmail() << std::endl;
+            file << "Question: " << user.getQuestion() << std::endl;
+            file << "Answer: " << user.getAnswer() << std::endl;
+            file << std::endl;
+        }
+        file.close(); // Feche o arquivo após concluir a escrita
+        std::cout << "Dados salvos com sucesso!" << std::endl;
+        return true;
+    } else {
+        std::cerr << "Erro: Não foi possível abrir o arquivo para salvamento." << std::endl;
+        return false;
+    }
+}
+
+std::string SaveFile::getValue(const std::string& line) {
+    std::size_t colonPos = line.find(':');
+    if (colonPos != std::string::npos) {
+        std::size_t valuePos = colonPos + 2; // Pula o ':' e o espaço após ele
+        std::string value = line.substr(valuePos);
+        return value;
+    }
+    return "";
+}
+
+bool SaveFile::load(LoginSystem& login) {
+    std::ifstream file("users_data.txt");
+    if (file.is_open()) {
+        std::string line;
+        std::vector<std::string> lines;
+
+        // Lê todas as linhas do arquivo
+        while (std::getline(file, line)) {
+            lines.push_back(line);
+        }
+
+        // Processa as linhas para obter os dados dos usuários
+        for (size_t i = 0; i < lines.size(); i += 6) {
+            std::string username = getValue(lines[i]);
+            std::string password = getValue(lines[i + 1]);
+            std::string email = getValue(lines[i + 2]);
+            std::string question = getValue(lines[i + 3]);
+            std::string answer = getValue(lines[i + 4]);
+
+            login.createUser(username, "pass", email, question, answer);
+            User* user = login.findUserByUsername(username);
+            if (user != nullptr) {
+                user->setPassword(password);
+            }
+        }
+
+        file.close(); // Fecha o arquivo após a leitura
+        std::cout << "Dados carregados com sucesso!" << std::endl;
+        return true;
+    } else {
+        std::cerr << "Erro: Não foi possível abrir o arquivo para carregamento." << std::endl;
+        return false;
+    }
+}

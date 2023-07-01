@@ -3,18 +3,30 @@
 #include "login.hpp"
 #include <iostream>
 
-// Inclua a definição da classe Login aqui
-
 TEST_CASE("Teste da classe Login") {
     LoginSystem log_in;
+    SaveFile saveFile("user_data.txt");
+
     std::string username = "anaC";
     std::string password = "123456";
     std::string email = "anaC@example.com";
     std::string question = "Qual é o nome do seu animal de estimação?";
     std::string answer = "Rex";
 
+    SUBCASE("Teste com arquivo existente") {
+        MESSAGE("teste");
+        CHECK(saveFile.load(log_in) == true);
+
+        // Realize as verificações necessárias para confirmar se os dados foram carregados corretamente
+
+        // Exemplo: Verifique se o usuário "anaC" foi criado corretamente
+        CHECK(log_in.login("anaC", "123456") == true);
+        CHECK(log_in.showUser() == true);
+    }
+
     // Teste da função createUser
     SUBCASE("Teste da função createUser") {
+        MESSAGE("teste");
         CHECK(log_in.createUser(username, password, email, question, answer) == true);
         CHECK(log_in.createUser(username, password, email, question, answer) == false); // Usuário já existe
         
@@ -27,10 +39,12 @@ TEST_CASE("Teste da classe Login") {
     }
 
     // Cria o Usuário após para o teste de createUser ser bem sucedido
+    // Para ser utilizado nas outras classes
     log_in.createUser(username, password, email, question, answer);
 
     // Teste da função login
     SUBCASE("Teste da função login") {
+        MESSAGE("teste");
         CHECK(log_in.login(username, password) == true); // Teste comum
         log_in.logout();
         CHECK(log_in.login(username, "wrong_password") == false); // Senha incorreta
@@ -43,6 +57,7 @@ TEST_CASE("Teste da classe Login") {
 
     // Teste da função logout
     SUBCASE("Teste da função logout") {
+        MESSAGE("teste");
         CHECK(log_in.logout() == false); // Nenhum usuário está logado
 
         CHECK(log_in.login(username, password) == true);
@@ -53,6 +68,7 @@ TEST_CASE("Teste da classe Login") {
 
     // Teste da função showUser
     SUBCASE("Teste da função showUser") {
+        MESSAGE("teste");
         CHECK(log_in.showUser() == false); // Nenhum usuário está logado
 
         CHECK(log_in.login(username, password) == true);
@@ -64,6 +80,7 @@ TEST_CASE("Teste da classe Login") {
 
     // Teste da função editUser
     SUBCASE("Teste da função editUser") {
+        MESSAGE("teste");
         int choice = 1;
 
         CHECK(log_in.editUser(password, choice, "123456", "0") == false); // Nenhum usuário está logado
@@ -79,7 +96,8 @@ TEST_CASE("Teste da classe Login") {
     }
 
     // Teste da função deleteUser
-    SUBCASE("Teste da função deleteUser") {        
+    SUBCASE("Teste da função deleteUser") { 
+        MESSAGE("teste");       
         CHECK(log_in.login(username, password) == true);
 
         CHECK(log_in.deleteUser(username, password, email, answer, "DELETAR") == true);
@@ -91,6 +109,7 @@ TEST_CASE("Teste da classe Login") {
 
     // Teste da função forgotPassword
     SUBCASE("Teste da função forgotPassword") {
+        MESSAGE("teste");
         CHECK(log_in.forgotPassword(username, "Rex", "123456") == true); // Alteração de senha bem-sucedida
         CHECK(log_in.login(username, password) == true); // Login com a nova senha bem-sucedido
 

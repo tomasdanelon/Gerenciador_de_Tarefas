@@ -4,6 +4,8 @@
 #include <map>
 #include <algorithm>
 #include <regex>
+#include <fstream>
+#include <sstream>
 #include "user.hpp"
 
 class LoginSystem{
@@ -37,11 +39,30 @@ class LoginSystem{
         std::string getUsername() const {
             return currentUsername;
         }
-    
-    private:
+
+        friend class SaveFile;
+
+    protected:
         std::map<std::string, User> _users;
+
+    private:
         bool isLoggedIn;
         std::string currentUsername;
+};
+
+class SaveFile{
+    public:
+        SaveFile(const std::string& filename) : _filename(filename), _file(filename){}
+
+        bool save(LoginSystem& login);
+
+        bool load(LoginSystem& login);
+
+        static std::string getValue(const std::string& line);
+    
+    private:
+        std::string _filename;
+        std::ifstream _file;
 };
 
 #endif
