@@ -78,11 +78,58 @@ public:
         });
     }
 
+    void use(TaskManager& task_manager) {
+    std::string command;
+
+    while (true) {
+        std::cout << "Insira um comando (add, list, remove, notes, sort_priority, sort_due_date, exit): ";
+        std::cin >> command;
+
+        if (command == "add") {
+            std::string task_name, due_date;
+            int priority;
+            std::cout << "Insira o nome da tarefa: ";
+            std::cin.ignore();
+            std::getline(std::cin, task_name);
+            std::cout << "Insira a prioridade: ";
+            std::cin >> priority;
+            std::cout << "Insira a data: ";
+            std::cin >> due_date;
+            task_manager.AddTask(Task(task_name, priority, due_date));
+        } else if (command == "list") {
+            task_manager.ListTasks();
+        } else if (command == "remove") {
+            int index;
+            std::cout << "Insira o numero da tarefa a remover: ";
+            std::cin >> index;
+            if (!task_manager.RemoveTask(index - 1)) {
+                std::cout << "Falha ao remover tarefa.\n";
+            }
+        } else if (command == "notes") {
+            int index;
+            std::string notes;
+            std::cout << "Insira o numero da tarefa a adicionar notas: ";
+            std::cin >> index;
+            std::cin.ignore();
+            std::cout << "Insira a nota: ";
+            std::getline(std::cin, notes);
+            if (!task_manager.AddNotes(index - 1, notes)) {
+                std::cout << "Falha a inserir uma nota.\n"; } 
+        } else if (command == "sort_priority") {
+            task_manager.SortTasksByPriority();
+        }else if (command == "sort_due_date") {
+            task_manager.SortTasksByDueDate();
+        }else if (command == "exit") {
+            break;
+        }
+    } 
+    }
+
 private:
     std::vector<Task> tasks_;
 };
 
-int main() {
+/*int main() {
     TaskManager task_manager;
     std::string command;
 
@@ -126,4 +173,4 @@ int main() {
          else if (command == "sort_due_date") {
             task_manager.SortTasksByDueDate();
         }
-             } }
+             } }*/
