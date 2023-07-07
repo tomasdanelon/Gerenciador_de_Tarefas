@@ -1,15 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <queue>
-#include <ctime>
-#include <iomanip>
-#include <sstream>
+#include <algorithm>
 
 class Task {
 public:
-    Task(const std::string& name, int priority, const std::tm& due_date)
-        : name_(name), priority_(priority), due_date_(due_date), completed_(false) {}
+    Task(const std::string& name, int priority, const std::string& due_date)
+        : name_(name), priority_(priority), due_date_(due_date) {}
 
     const std::string& GetName() const {
         return name_;
@@ -19,111 +16,114 @@ public:
         return priority_;
     }
 
-    const std::tm& GetDueDate() const {
+    const std::string& GetDueDate() const {
         return due_date_;
-    }
-
-    bool IsCompleted() const {
-        return completed_;
-    }
-
-    void SetCompleted(bool completed) {
-        completed_ = completed;
     }
 
     const std::string& GetNotes() const {
         return notes_;
     }
 
-    void SetNotes(const std::string& notes) {
+    void AddNotes(const std::string& notes) {
         notes_ += notes;
-    }
-
-    bool operator<(const Task& other) const {
-        if (priority_ != other.priority_) {
-            return priority_ < other.priority_;
-        }
-        return mktime(const_cast<std::tm*>(&due_date_)) > mktime(const_cast<std::tm*>(&other.due_date_));
     }
 
 private:
     std::string name_;
     int priority_;
-    std::tm due_date_;
-    bool completed_;
+    std::string due_date_;
     std::string notes_;
 };
 
 class TaskManager {
 public:
     void AddTask(const Task& task) {
-        tasks_.push(task);
+        tasks_.push_back(task);
     }
 
-    void RemoveTask() {
-        if (!tasks_.empty()) {
-            tasks_.pop();
+    bool AddNotes(int task_index, const std::string& notes) {
+        if (task_index >= 0 && task_index < tasks_.size()) {
+            tasks_[task_index].AddNotes(notes);
+            return true;
         }
+        return false;
+    }
+
+    bool RemoveTask(int task_index) {
+        if (task_index >= 0 && task_index < tasks_.size()) {
+            tasks_.erase(tasks_.begin() + task_index);
+            return true;
+        }
+        return false;
     }
 
     void ListTasks() const {
-        std::priority_queue<Task> temp_tasks = tasks_;
-        int index = 1;
-        while (!temp_tasks.empty()) {
-            const Task& task = temp_tasks.top();
-            std::cout << index++ << ". " << task.GetName() << " (Prioridade: " << task.GetPriority() << ", Data: ";
-            std::cout << std::put_time(&task.GetDueDate(), "%d-%m-%Y") << ", Completa: " << (task.IsCompleted() ? "Sim" : "Nao") << ")" << std::endl;
-            if (!task.GetNotes().empty()) {
-                std::cout << "    Notes: " << task.GetNotes() << std::endl;
-            }
-            temp_tasks.pop();
+        for (size_t i = 0; i < tasks_.size(); ++i) {
+            std::cout << "Task " << i + 1 << ": " << tasks_[i].GetName() << "\n";
+            std::cout << "Priority: " << tasks_[i].GetPriority() << "\n";
+            std::cout << "Due date: " << tasks_[i].GetDueDate() << "\n";
+            std::cout << "Notes: " << tasks_[i].GetNotes() << "\n";
         }
     }
 
-private:
-    std::priority_queue<Task> tasks_;
-};
+    void SortTasksByPriority() {
+        std::sort(tasks_.begin(), tasks_.end(), [](const Task& a, const Task& b) {
+            return a.GetPriority() < b.GetPriority();
+        });
+    }
 
-std::tm ParseDate(const std::string& date_str) {
-    std::tm tm = {};
-    std::istringstream ss(date_str);
-    ss >> std::get_time(&tm, "%d-%m-%Y");
-    return tm;
-}
+    void SortTasksByDueDate() {
+        std::sort(tasks_.begin(), tasks_.end(), [](const Task& a, const Task& b) {
+            return a.GetDueDate() < b.GetDueDate();
+        });
+    }
+
+private:
+    std::vector<Task> tasks_;
+};
 
 int main() {
     TaskManager task_manager;
     std::string command;
 
     while (true) {
-        std::cout << "Enter command (add, list, remove, complete, notes, exit): ";
+        std::cout << "Insira um comando (add, list, remove, notes, sort_priority, sort_due_date, exit): ";
         std::cin >> command;
 
         if (command == "add") {
             std::string task_name, due_date;
             int priority;
-            std::cout << "Insira o nome da tarefa:";
+            std::cout << "Insira o nome da tarefa: ";
             std::cin.ignore();
             std::getline(std::cin, task_name);
-            std::cout << "Insira a prioridade da tarefa(1-5) ";
+            std::cout << "Insira a prioridade: ";
             std::cin >> priority;
-            std::cout << "Insira a data de entrega da tarefa (DD-MM-AAAA): ";
+            std::cout << "Insira a data: ";
             std::cin >> due_date;
-            task_manager.AddTask(Task(task_name, priority, ParseDate(due_date)));
+            task_manager.AddTask(Task(task_name, priority, due_date));
         } else if (command == "list") {
             task_manager.ListTasks();
         } else if (command == "remove") {
-            task_manager.RemoveTask();
-        } else if (command == "complete") {
-            // Mark a task as completed
+            int index;
+            std::cout << "Insira o numero da tarefa a remover: ";
+            std::cin >> index;
+            if (!task_manager.RemoveTask(index - 1)) {
+                std::cout << "Falha ao remover tarefa.\n";
+            }
         } else if (command == "notes") {
-            // Add notes to a task
-        } else if (command == "exit") {
-            break;
-        } else {
-            std::cout << "Comando invalido, tente novamente." << std::endl;
+            int index;
+            std::string notes;
+            std::cout << "Insira o numero da tarefa a adicionar notas: ";
+            std::cin >> index;
+            std::cin.ignore();
+            std::cout << "Insira a nota: ";
+            std::getline(std::cin, notes);
+            if (!task_manager.AddNotes(index - 1, notes)) {
+                std::cout << "Falha a inserir uma nota.\n"; } 
+        } else if (command == "sort_priority") {
+            task_manager.SortTasksByPriority();
         }
-    }
-
-    return 0;
-}
+         else if (command == "sort_due_date") {
+            task_manager.SortTasksByDueDate();
+        }
+             } }
