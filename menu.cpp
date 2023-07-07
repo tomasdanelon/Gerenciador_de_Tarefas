@@ -1,3 +1,7 @@
+/**
+ * @file main.cpp
+ * @brief Programa de gerenciamento de tarefas com login de usuário.
+ */
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -6,10 +10,14 @@
 #include "login.hpp"
 #include "task_manager.cpp"
 
+/**
+ * @brief Função principal que inicia o programa.
+ * @return O código de saída do programa.
+ */
 int main(){
-    LoginSystem log_in;
-    TaskManager task_manager;
-    SaveFile saveFile("user_data.txt");
+    LoginSystem log_in; /**< Objeto para o sistema de login */
+    TaskManager task_manager; /**< Objeto para o gerenciador de tarefas */
+    SaveFile saveFile("user_data.txt"); /**< Objeto para salvar os dados dos usuários */
 
     std::ifstream file("user_data.txt");
     if (!file.peek()) {
@@ -18,11 +26,11 @@ int main(){
         saveFile.load(log_in);
     }
 
-    int choice=1;
-    int choice1=1;
-    int tarefas=0;
-    int logado=0;
-    bool sucesso;
+    int choice = 1; /**< Opção escolhida pelo usuário */
+    int choice1 = 1; /**< Opção escolhida pelo usuário logado */
+    int tarefas = 0; /**< Número de tarefas */
+    int logado = 0; /**< Indica se o usuário está logado */
+    bool sucesso;   /**<Indica se o login teve sucesso */
 
     std::cout << "Bem vindo ao sistema de gerenciamento de tarefas!" << std::endl
     << "Para utilizar o sistema você deve entrar em sua conta primeiro." << std::endl;

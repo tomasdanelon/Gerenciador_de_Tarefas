@@ -1,0 +1,119 @@
+\hypertarget{classSaveFile}{}\doxysection{Save\+File Class Reference}
+\label{classSaveFile}\index{SaveFile@{SaveFile}}
+
+
+Classe responsável por salvar e carregar os dados do sistema de login em um arquivo.  
+
+
+
+
+{\ttfamily \#include $<$login.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSaveFile_aecaf190161610386bd756d0338634855}{Save\+File}} (const std\+::string \&filename)
+\begin{DoxyCompactList}\small\item\em Construtor da classe \mbox{\hyperlink{classSaveFile}{Save\+File}}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classSaveFile_a68a1fb9a92e16e5c98919ad7a58ae72d}{save}} (\mbox{\hyperlink{classLoginSystem}{Login\+System}} \&login)
+\begin{DoxyCompactList}\small\item\em Salva os dados do sistema de login em um arquivo. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classSaveFile_ae5e43ac00b7c5190ee94e12859f2b0de}{load}} (\mbox{\hyperlink{classLoginSystem}{Login\+System}} \&login)
+\begin{DoxyCompactList}\small\item\em Carrega os dados do sistema de login a partir de um arquivo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{classSaveFile_a222c9f8aee0ea5c585a9bd0b11dccf49}{get\+Value}} (const std\+::string \&line)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classSaveFile_af694f73016d2d249cb346a06442f7a7f}{\+\_\+filename}}
+\item 
+std\+::ifstream \mbox{\hyperlink{classSaveFile_af14acc6f3e36802816404e5818e8c673}{\+\_\+file}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe responsável por salvar e carregar os dados do sistema de login em um arquivo. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSaveFile_aecaf190161610386bd756d0338634855}\label{classSaveFile_aecaf190161610386bd756d0338634855}} 
+\index{SaveFile@{SaveFile}!SaveFile@{SaveFile}}
+\index{SaveFile@{SaveFile}!SaveFile@{SaveFile}}
+\doxysubsubsection{\texorpdfstring{SaveFile()}{SaveFile()}}
+{\footnotesize\ttfamily Save\+File\+::\+Save\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construtor da classe \mbox{\hyperlink{classSaveFile}{Save\+File}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & O nome do arquivo onde os dados serão salvos ou carregados. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSaveFile_a222c9f8aee0ea5c585a9bd0b11dccf49}\label{classSaveFile_a222c9f8aee0ea5c585a9bd0b11dccf49}} 
+\index{SaveFile@{SaveFile}!getValue@{getValue}}
+\index{getValue@{getValue}!SaveFile@{SaveFile}}
+\doxysubsubsection{\texorpdfstring{getValue()}{getValue()}}
+{\footnotesize\ttfamily std\+::string Save\+File\+::get\+Value (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classSaveFile_ae5e43ac00b7c5190ee94e12859f2b0de}\label{classSaveFile_ae5e43ac00b7c5190ee94e12859f2b0de}} 
+\index{SaveFile@{SaveFile}!load@{load}}
+\index{load@{load}!SaveFile@{SaveFile}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily bool Save\+File\+::load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classLoginSystem}{Login\+System}} \&}]{login }\end{DoxyParamCaption})}
+
+
+
+Carrega os dados do sistema de login a partir de um arquivo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & O sistema de login onde os dados serão carregados. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true se os dados foram carregados com sucesso, false caso contrário. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSaveFile_a68a1fb9a92e16e5c98919ad7a58ae72d}\label{classSaveFile_a68a1fb9a92e16e5c98919ad7a58ae72d}} 
+\index{SaveFile@{SaveFile}!save@{save}}
+\index{save@{save}!SaveFile@{SaveFile}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily bool Save\+File\+::save (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classLoginSystem}{Login\+System}} \&}]{login }\end{DoxyParamCaption})}
+
+
+
+Salva os dados do sistema de login em um arquivo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & O sistema de login contendo os dados a serem salvos. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true se os dados foram salvos com sucesso, false caso contrário. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classSaveFile_af14acc6f3e36802816404e5818e8c673}\label{classSaveFile_af14acc6f3e36802816404e5818e8c673}} 
+\index{SaveFile@{SaveFile}!\_file@{\_file}}
+\index{\_file@{\_file}!SaveFile@{SaveFile}}
+\doxysubsubsection{\texorpdfstring{\_file}{\_file}}
+{\footnotesize\ttfamily std\+::ifstream Save\+File\+::\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSaveFile_af694f73016d2d249cb346a06442f7a7f}\label{classSaveFile_af694f73016d2d249cb346a06442f7a7f}} 
+\index{SaveFile@{SaveFile}!\_filename@{\_filename}}
+\index{\_filename@{\_filename}!SaveFile@{SaveFile}}
+\doxysubsubsection{\texorpdfstring{\_filename}{\_filename}}
+{\footnotesize\ttfamily std\+::string Save\+File\+::\+\_\+filename\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{login_8hpp}{login.\+hpp}}\item 
+\mbox{\hyperlink{login_8cpp}{login.\+cpp}}\end{DoxyCompactItemize}
