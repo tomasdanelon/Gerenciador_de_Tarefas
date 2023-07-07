@@ -27,7 +27,9 @@ TEST_CASE("Teste da classe Login") {
     // Teste da função createUser
     SUBCASE("Teste da função createUser") {
         MESSAGE("teste");
-        CHECK(log_in.createUser(username, password, email, question, answer) == true);
+        CHECK(log_in.createUser(const std::string& username, const std::string& password,
+                        const std::string& email, const std::string& question,
+                        const std::string& answer) == true);
         CHECK(log_in.createUser(username, password, email, question, answer) == false); // Usuário já existe
         
         // Teste com campos em branco
