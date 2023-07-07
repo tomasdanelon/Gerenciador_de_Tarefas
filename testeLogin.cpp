@@ -20,7 +20,7 @@ TEST_CASE("Teste da classe Login") {
         // Realize as verificações necessárias para confirmar se os dados foram carregados corretamente
 
         // Exemplo: Verifique se o usuário "anaC" foi criado corretamente
-        CHECK(log_in.login("anaC", "123456") == true);
+        CHECK(log_in.login() == true);
         CHECK(log_in.showUser() == true);
     }
 
@@ -45,14 +45,10 @@ TEST_CASE("Teste da classe Login") {
     // Teste da função login
     SUBCASE("Teste da função login") {
         MESSAGE("teste");
-        CHECK(log_in.login(username, password) == true); // Teste comum
+        CHECK(log_in.login() == true); // Teste comum
         log_in.logout();
-        CHECK(log_in.login(username, "wrong_password") == false); // Senha incorreta
-        log_in.logout();
-        CHECK(log_in.login("nonexistent", password) == false); // Usuário não encontrado
-
-        // Teste com usuário já logado
-        CHECK(log_in.login("another", "another_password") == false); // Já existe um usuário logado
+        CHECK(log_in.login() == false); // Senha incorreta
+        CHECK(log_in.login() == false); // Usuário não encontrado
     }
 
     // Teste da função logout
@@ -60,7 +56,7 @@ TEST_CASE("Teste da classe Login") {
         MESSAGE("teste");
         CHECK(log_in.logout() == false); // Nenhum usuário está logado
 
-        CHECK(log_in.login(username, password) == true);
+        CHECK(log_in.login() == true);
 
         CHECK(log_in.logout() == true);
         CHECK(log_in.logout() == false); // Nenhum usuário está logado
@@ -71,7 +67,7 @@ TEST_CASE("Teste da classe Login") {
         MESSAGE("teste");
         CHECK(log_in.showUser() == false); // Nenhum usuário está logado
 
-        CHECK(log_in.login(username, password) == true);
+        CHECK(log_in.login() == true);
 
         CHECK(log_in.showUser() == true);
         CHECK(log_in.logout() == true);
@@ -81,40 +77,37 @@ TEST_CASE("Teste da classe Login") {
     // Teste da função editUser
     SUBCASE("Teste da função editUser") {
         MESSAGE("teste");
-        int choice = 1;
 
-        CHECK(log_in.editUser(password, choice, "123456", "0") == false); // Nenhum usuário está logado
+        CHECK(log_in.editUser() == false); // Nenhum usuário está logado
 
-        CHECK(log_in.login(username, password) == true);
+        CHECK(log_in.login() == true);
 
-        CHECK(log_in.editUser(password, choice, password, "0") == true);
-        choice = 2;
-        CHECK(log_in.editUser(password, choice, "Qual a cor do céu?", "Azul") == true);
+        CHECK(log_in.editUser() == true);
+        CHECK(log_in.editUser() == true);
         CHECK(log_in.logout() == true);
-        choice= 1;
-        CHECK(log_in.editUser(password, choice, "123456", "0") == false); // Nenhum usuário está logado
+        CHECK(log_in.editUser() == false); // Nenhum usuário está logado
     }
 
     // Teste da função deleteUser
     SUBCASE("Teste da função deleteUser") { 
         MESSAGE("teste");       
-        CHECK(log_in.login(username, password) == true);
+        CHECK(log_in.login() == true);
 
-        CHECK(log_in.deleteUser(username, password, email, answer, "DELETAR") == true);
-        CHECK(log_in.login(username, password) == false); // Usuário foi excluído
+        CHECK(log_in.deleteUser() == true);
+        CHECK(log_in.login() == false); // Usuário foi excluído
 
         // Tentativa de excluir um usuário inexistente
-        CHECK(log_in.deleteUser(username, password, email, answer, "DELETAR") == false);
+        CHECK(log_in.deleteUser() == false);
     }
 
     // Teste da função forgotPassword
     SUBCASE("Teste da função forgotPassword") {
         MESSAGE("teste");
-        CHECK(log_in.forgotPassword(username, "Rex", "123456") == true); // Alteração de senha bem-sucedida
-        CHECK(log_in.login(username, password) == true); // Login com a nova senha bem-sucedido
+        CHECK(log_in.forgotPassword() == true); // Alteração de senha bem-sucedida
+        CHECK(log_in.login() == true); // Login com a nova senha bem-sucedido
 
         log_in.logout();
         // Tentativa de alterar a senha com resposta incorreta à pergunta de segurança
-        CHECK(log_in.forgotPassword(username, "Re", "123456") == false);
+        CHECK(log_in.forgotPassword() == false);
     }
 }

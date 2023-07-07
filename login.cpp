@@ -77,12 +77,20 @@ bool LoginSystem::createUser(const std::string& username, const std::string& pas
     return true;
 }
 
-bool LoginSystem::login(const std::string& username, const std::string& password){
+bool LoginSystem::login(){
     // Verificar se já existe um usuário logado
     if (isLoggedIn) {
         std::cout << "Já existe um usuário logado. Faça logout!!\n";
         return false;
     }
+
+    std::string username;
+    std::cout << "Insira o username: " << std::endl;
+    std::cin >> username;
+
+    std::string password;
+    std::cout << "Insira a senha: " << std::endl;
+    std::cin >> password;
 
     // Procurar usuário pelo username e obter objeto
     User* user = LoginSystem::findUserByUsername(username);
@@ -131,12 +139,16 @@ bool LoginSystem::showUser(){
     return true;
 }
 
-bool LoginSystem::editUser(const std::string& password, const int& choice, const std::string& change1, const std::string& change2){
+bool LoginSystem::editUser(){
     // Verificar se há um usuário logado
     if (!isLoggedIn) {
         std::cout << "Nenhum usuário está logado." << std::endl;
         return false;
     }
+
+    std::string password;
+    std::cout << "Digite a senha atual: ";
+    std::cin >> password;
 
     // Verificar se a senha atual está correta
     if (_users[currentUsername].getPassword() != PasswordHasher::calcularHash(password)) {
@@ -144,7 +156,7 @@ bool LoginSystem::editUser(const std::string& password, const int& choice, const
         return false;
     }
 
-    /*std::cout << "Selecione o que deseja editar:" << std::endl;
+    std::cout << "Selecione o que deseja editar:" << std::endl;
     std::cout << "1. Senha" << std::endl;
     std::cout << "2. Pergunta de segurança" << std::endl;
     std::cout << "0. Sair da edição" << std::endl;
@@ -155,7 +167,7 @@ bool LoginSystem::editUser(const std::string& password, const int& choice, const
     while (choice != 0 && choice != 1 && choice != 2) {
         std::cout << "Opção inválida. Digite novamente: ";
         std::cin >> choice;
-    }*/
+    }
 
     switch (choice) {
         case 0:
@@ -163,53 +175,53 @@ bool LoginSystem::editUser(const std::string& password, const int& choice, const
             return false;
         case 1:
         {
-            /*std::string newPassword;
+            std::string newPassword;
             std::cout << "Digite a nova senha: ";
-            std::cin >> newPassword;*/
+            std::cin >> newPassword;
 
             // Verificação de limite de caracteres para a nova senha
             constexpr int kNewPasswordMaxLength = 30;
 
-            if (change1.length() > kNewPasswordMaxLength) {
+            if (newPassword.length() > kNewPasswordMaxLength) {
                 std::cout << "A nova senha excede o limite de " << kNewPasswordMaxLength << " caracteres.\n";
                 break;
             }
 
-            _users[currentUsername].setPassword(PasswordHasher::calcularHash(change1));
+            _users[currentUsername].setPassword(PasswordHasher::calcularHash(newPassword));
 
             std::cout << "Senha alterada com sucesso para o usuário " << currentUsername << "." << std::endl;
             break;
         }
     case 2:
         {
-            /*std::string newQuestion;
+            std::string newQuestion;
             std::cout << "Digite a nova pergunta de segurança: ";
             std::cin.ignore();  // Limpar o buffer de entrada
-            std::getline(std::cin, newQuestion);*/
+            std::getline(std::cin, newQuestion);
 
             // Verificação de limite de caracteres para a nova pergunta de segurança
             constexpr int kNewQuestionMaxLength = 100;
 
-            if (change1.length() > kNewQuestionMaxLength) {
+            if (newQuestion.length() > kNewQuestionMaxLength) {
                 std::cout << "A nova pergunta de segurança excede o limite de " << kNewQuestionMaxLength << " caracteres.\n";
                 break;
             }
 
-            /*std::string newAnswer;
+            std::string newAnswer;
             std::cout << "Digite a nova resposta da pergunta de segurança: ";
             std::cin.ignore();  // Limpar o buffer de entrada
-            std::getline(std::cin, newAnswer);*/
+            std::getline(std::cin, newAnswer);
 
             // Verificação de limite de caracteres para a nova pergunta de segurança
             constexpr int kNewAnswerMaxLength = 100;
 
-            if (change2.length() > kNewAnswerMaxLength) {
+            if (newAnswer.length() > kNewAnswerMaxLength) {
                 std::cout << "A nova reposta de segurança excede o limite de " << kNewQuestionMaxLength << " caracteres.\n";
                 break;
             }
 
-            _users[currentUsername].setQuestion(change1);
-            _users[currentUsername].setAnswer(change2);
+            _users[currentUsername].setQuestion(newQuestion);
+            _users[currentUsername].setAnswer(newAnswer);
 
             //Salvar as edições
             SaveFile saveFile("user_data.txt");
@@ -222,29 +234,39 @@ bool LoginSystem::editUser(const std::string& password, const int& choice, const
     return true;
 }
 
-bool LoginSystem::deleteUser(const std::string& username, const std::string& password,
-                            const std::string& email, const std::string& answer, const std::string& confirmation){
+bool LoginSystem::deleteUser(){
     // Verificar se o usuário está logado
     if (!isLoggedIn) {
         std::cout << "Nenhum usuário está logado no momento." << std::endl;
         return false;
     }
 
+    // Pede os dados do usuario para confirmar exclusão
+    std::string password;
+    std::cout << "Digite a senha para confirmar a exclusão do usuário: ";
+    std::cin >> password;
+    std::string email;
+    std::cout << "Digite o email para confirmar a exclusão do usuário: ";
+    std::cin >> email;
+    std::string answer;
+    std::cout<< _users[currentUsername].getQuestion() << std::endl;
+    std::cout << "Digite a resposta de segurança para confirmar a exclusão do usuário: ";
+    std::cin >> answer;
+
     std::string passwordHash = PasswordHasher::calcularHash(password);
 
     // Verificar se o usuário atual corresponde aos campos informados
-    if (currentUsername != username ||
-        _users[currentUsername].getPassword() != passwordHash ||
+    if (_users[currentUsername].getPassword() != passwordHash ||
         _users[currentUsername].getEmail() != email ||
         _users[currentUsername].getAnswer() != answer) {
         std::cout << "Os campos informados não correspondem ao usuário atual." << std::endl;
         return false;
     }
 
-    /* Solicitar a confirmação do usuário
+    // Solicitar a confirmação do usuário
     std::string confirmation;
     std::cout << "Digite 'DELETAR' para confirmar a exclusão do usuário: ";
-    std::cin >> confirmation;*/
+    std::cin >> confirmation;
 
     // Verificar se a confirmação está correta
     if (confirmation != "DELETAR") {
@@ -266,12 +288,17 @@ bool LoginSystem::deleteUser(const std::string& username, const std::string& pas
     return true;
 }
 
-bool LoginSystem::forgotPassword(const std::string& username, const std::string& answer, const std::string& newPassword){
+bool LoginSystem::forgotPassword(){
     // Verificar se o usuário está logado
     if (isLoggedIn) {
         std::cout << "Você já está logado. Faça logout antes de esquecer a senha." << std::endl;
         return false;
     }
+
+    // Solicitar o username
+    std::string username;
+    std::cout << "Insira o username: " << std::endl;
+    std::cin >> username;
 
     // Procurar usuário pelo username e obter objeto
     User* user = LoginSystem::findUserByUsername(username);
@@ -282,10 +309,10 @@ bool LoginSystem::forgotPassword(const std::string& username, const std::string&
         return false;
     }
 
-    /* Solicitar a resposta à pergunta de segurança
+    // Solicitar a resposta à pergunta de segurança
     std::string answer;
-    std::cout << "Responda à pergunta de segurança: " << it->second.getQuestion() << std::endl;
-    std::cin >> answer;*/
+    std::cout << "Responda à pergunta de segurança: " << user->getQuestion() << std::endl;
+    std::cin >> answer;
 
     // Verificar se a resposta está correta
     if (answer != user->getAnswer()) {
@@ -293,10 +320,10 @@ bool LoginSystem::forgotPassword(const std::string& username, const std::string&
         return false;
     }
 
-    /* Solicitar a nova senha
+    // Solicitar a nova senha
     std::string newPassword;
     std::cout << "Digite a nova senha: ";
-    std::cin >> newPassword;*/
+    std::cin >> newPassword;
 
     // Atualizar a senha do usuário
     user->setPassword(PasswordHasher::calcularHash(newPassword));
