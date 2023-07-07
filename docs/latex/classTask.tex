@@ -1,0 +1,160 @@
+\hypertarget{classTask}{}\doxysection{Task Class Reference}
+\label{classTask}\index{Task@{Task}}
+
+
+Classe que representa uma tarefa.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTask_a36e2f361d3f075ea88fc83d5b669981c}{Task}} (const std\+::string \&name, int priority, const std\+::string \&due\+\_\+date)
+\begin{DoxyCompactList}\small\item\em Construtor da classe \mbox{\hyperlink{classTask}{Task}}. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classTask_a74548aed32b9bff4016611a1f6f67320}{Get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Obtém o nome da tarefa. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classTask_ad9ba6e3128e9f55acf08dfcfeceeb326}{Get\+Priority}} () const
+\begin{DoxyCompactList}\small\item\em Obtém a prioridade da tarefa. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classTask_a69fd64ce7eab378a9e8a0358791e0ef2}{Get\+Due\+Date}} () const
+\begin{DoxyCompactList}\small\item\em Obtém a data de vencimento da tarefa. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classTask_a378528cef6424d0de3aa6330b86c0ded}{Get\+Notes}} () const
+\begin{DoxyCompactList}\small\item\em Obtém as notas da tarefa. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTask_afa25e019b7a1364aa8911070b5dfc340}{Add\+Notes}} (const std\+::string \&notes)
+\begin{DoxyCompactList}\small\item\em Adiciona notas à tarefa. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classTask_afcec01c3184a926212ab3207ef49f7c1}{name\+\_\+}}
+\item 
+int \mbox{\hyperlink{classTask_ad7d1b58e73a2d716dabd08ab985a35f9}{priority\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classTask_ad4da7f215d123092a46a0122dc2827d2}{due\+\_\+date\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classTask_a85b7d056bc2638f03c2cfa5049349071}{notes\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe que representa uma tarefa. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classTask_a36e2f361d3f075ea88fc83d5b669981c}\label{classTask_a36e2f361d3f075ea88fc83d5b669981c}} 
+\index{Task@{Task}!Task@{Task}}
+\index{Task@{Task}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{Task()}{Task()}}
+{\footnotesize\ttfamily Task\+::\+Task (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{int}]{priority,  }\item[{const std\+::string \&}]{due\+\_\+date }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construtor da classe \mbox{\hyperlink{classTask}{Task}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & O nome da tarefa. \\
+\hline
+{\em priority} & A prioridade da tarefa. \\
+\hline
+{\em due\+\_\+date} & A data de vencimento da tarefa. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classTask_afa25e019b7a1364aa8911070b5dfc340}\label{classTask_afa25e019b7a1364aa8911070b5dfc340}} 
+\index{Task@{Task}!AddNotes@{AddNotes}}
+\index{AddNotes@{AddNotes}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{AddNotes()}{AddNotes()}}
+{\footnotesize\ttfamily void Task\+::\+Add\+Notes (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{notes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adiciona notas à tarefa. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em notes} & As notas a serem adicionadas. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classTask_a69fd64ce7eab378a9e8a0358791e0ef2}\label{classTask_a69fd64ce7eab378a9e8a0358791e0ef2}} 
+\index{Task@{Task}!GetDueDate@{GetDueDate}}
+\index{GetDueDate@{GetDueDate}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{GetDueDate()}{GetDueDate()}}
+{\footnotesize\ttfamily const std\+::string\& Task\+::\+Get\+Due\+Date (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Obtém a data de vencimento da tarefa. 
+
+\begin{DoxyReturn}{Returns}
+A data de vencimento da tarefa. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTask_a74548aed32b9bff4016611a1f6f67320}\label{classTask_a74548aed32b9bff4016611a1f6f67320}} 
+\index{Task@{Task}!GetName@{GetName}}
+\index{GetName@{GetName}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily const std\+::string\& Task\+::\+Get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Obtém o nome da tarefa. 
+
+\begin{DoxyReturn}{Returns}
+O nome da tarefa. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTask_a378528cef6424d0de3aa6330b86c0ded}\label{classTask_a378528cef6424d0de3aa6330b86c0ded}} 
+\index{Task@{Task}!GetNotes@{GetNotes}}
+\index{GetNotes@{GetNotes}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{GetNotes()}{GetNotes()}}
+{\footnotesize\ttfamily const std\+::string\& Task\+::\+Get\+Notes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Obtém as notas da tarefa. 
+
+\begin{DoxyReturn}{Returns}
+As notas da tarefa. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTask_ad9ba6e3128e9f55acf08dfcfeceeb326}\label{classTask_ad9ba6e3128e9f55acf08dfcfeceeb326}} 
+\index{Task@{Task}!GetPriority@{GetPriority}}
+\index{GetPriority@{GetPriority}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{GetPriority()}{GetPriority()}}
+{\footnotesize\ttfamily int Task\+::\+Get\+Priority (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Obtém a prioridade da tarefa. 
+
+\begin{DoxyReturn}{Returns}
+A prioridade da tarefa. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classTask_ad4da7f215d123092a46a0122dc2827d2}\label{classTask_ad4da7f215d123092a46a0122dc2827d2}} 
+\index{Task@{Task}!due\_date\_@{due\_date\_}}
+\index{due\_date\_@{due\_date\_}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{due\_date\_}{due\_date\_}}
+{\footnotesize\ttfamily std\+::string Task\+::due\+\_\+date\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classTask_afcec01c3184a926212ab3207ef49f7c1}\label{classTask_afcec01c3184a926212ab3207ef49f7c1}} 
+\index{Task@{Task}!name\_@{name\_}}
+\index{name\_@{name\_}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{name\_}{name\_}}
+{\footnotesize\ttfamily std\+::string Task\+::name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classTask_a85b7d056bc2638f03c2cfa5049349071}\label{classTask_a85b7d056bc2638f03c2cfa5049349071}} 
+\index{Task@{Task}!notes\_@{notes\_}}
+\index{notes\_@{notes\_}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{notes\_}{notes\_}}
+{\footnotesize\ttfamily std\+::string Task\+::notes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classTask_ad7d1b58e73a2d716dabd08ab985a35f9}\label{classTask_ad7d1b58e73a2d716dabd08ab985a35f9}} 
+\index{Task@{Task}!priority\_@{priority\_}}
+\index{priority\_@{priority\_}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{priority\_}{priority\_}}
+{\footnotesize\ttfamily int Task\+::priority\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{task__manager_8cpp}{task\+\_\+manager.\+cpp}}\end{DoxyCompactItemize}

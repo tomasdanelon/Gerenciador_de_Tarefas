@@ -1,0 +1,252 @@
+\hypertarget{classLoginSystem}{}\doxysection{Login\+System Class Reference}
+\label{classLoginSystem}\index{LoginSystem@{LoginSystem}}
+
+
+Classe que representa o sistema de login.  
+
+
+
+
+{\ttfamily \#include $<$login.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLoginSystem_ad8091153e673fb3d06bccb35ae204a04}{Login\+System}} ()
+\item 
+bool \mbox{\hyperlink{classLoginSystem_aa51be85b210c383fa74ae0c2f820556a}{create\+User}} (const std\+::string \&username, const std\+::string \&password, const std\+::string \&email, const std\+::string \&question, const std\+::string \&answer)
+\begin{DoxyCompactList}\small\item\em Cria um novo usuário no sistema de login. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classLoginSystem_ad2f40958e73bf29b84e3f01ddc7d50e3}{login}} ()
+\begin{DoxyCompactList}\small\item\em Realiza o login de um usuário no sistema de login. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classLoginSystem_a0e06adffe81f39617436eab29567a263}{logout}} ()
+\begin{DoxyCompactList}\small\item\em Realiza o logout do usuário atual no sistema de login. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classLoginSystem_af6225af6267cc407bb7ee1d68a8a00a0}{show\+User}} ()
+\begin{DoxyCompactList}\small\item\em Exibe o nome de usuário do usuário atualmente logado. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classLoginSystem_a629674ee4ee48c0dee102473300e2926}{edit\+User}} ()
+\begin{DoxyCompactList}\small\item\em Edita as informações do usuário atualmente logado. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classLoginSystem_aea11f77c4c2db6b871ed973e6ece4b57}{delete\+User}} ()
+\begin{DoxyCompactList}\small\item\em Exclui o usuário atualmente logado do sistema de login. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classLoginSystem_aa72da749a9eceedcc677afbdd82af270}{forgot\+Password}} ()
+\begin{DoxyCompactList}\small\item\em Recupera a senha do usuário caso tenha sido esquecida. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classUser}{User}} $\ast$ \mbox{\hyperlink{classLoginSystem_ae84eafb9994a3717005b6215c37d3377}{find\+User\+By\+Username}} (const std\+::string \&username)
+\begin{DoxyCompactList}\small\item\em Verifica se um usuário com o nome de usuário fornecido já existe. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classLoginSystem_a87d39a6f488311bacd54767ae21eb5ea}{check\+Length}} (const int Max\+Length, const std\+::string \&field)
+\begin{DoxyCompactList}\small\item\em Verifica se uma string excede o tamanho máximo especificado. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classLoginSystem_aef26d7db58a7f9279c7941747704ab65}{get\+Username}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{classUser}{User}} $>$ \mbox{\hyperlink{classLoginSystem_a8c6d79afd71a17ec6a0408b38929b048}{\+\_\+users}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classLoginSystem_a7bbb0df743698c9b9e39506cdc1772a4}{is\+Logged\+In}}
+\item 
+std\+::string \mbox{\hyperlink{classLoginSystem_a614ee6312b4700246d22d65453b19fb5}{current\+Username}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classLoginSystem_a196cc6a8690a586cc03363627df78fdc}{Save\+File}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe que representa o sistema de login. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classLoginSystem_ad8091153e673fb3d06bccb35ae204a04}\label{classLoginSystem_ad8091153e673fb3d06bccb35ae204a04}} 
+\index{LoginSystem@{LoginSystem}!LoginSystem@{LoginSystem}}
+\index{LoginSystem@{LoginSystem}!LoginSystem@{LoginSystem}}
+\doxysubsubsection{\texorpdfstring{LoginSystem()}{LoginSystem()}}
+{\footnotesize\ttfamily Login\+System\+::\+Login\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classLoginSystem_a87d39a6f488311bacd54767ae21eb5ea}\label{classLoginSystem_a87d39a6f488311bacd54767ae21eb5ea}} 
+\index{LoginSystem@{LoginSystem}!checkLength@{checkLength}}
+\index{checkLength@{checkLength}!LoginSystem@{LoginSystem}}
+\doxysubsubsection{\texorpdfstring{checkLength()}{checkLength()}}
+{\footnotesize\ttfamily bool Login\+System\+::check\+Length (\begin{DoxyParamCaption}\item[{const int}]{Max\+Length,  }\item[{const std\+::string \&}]{field }\end{DoxyParamCaption})}
+
+
+
+Verifica se uma string excede o tamanho máximo especificado. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+Length} & O tamanho máximo permitido. \\
+\hline
+{\em field} & A string a ser verificada. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true se a string excede o tamanho máximo, false caso contrário. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLoginSystem_aa51be85b210c383fa74ae0c2f820556a}\label{classLoginSystem_aa51be85b210c383fa74ae0c2f820556a}} 
+\index{LoginSystem@{LoginSystem}!createUser@{createUser}}
+\index{createUser@{createUser}!LoginSystem@{LoginSystem}}
+\doxysubsubsection{\texorpdfstring{createUser()}{createUser()}}
+{\footnotesize\ttfamily bool Login\+System\+::create\+User (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{username,  }\item[{const std\+::string \&}]{password,  }\item[{const std\+::string \&}]{email,  }\item[{const std\+::string \&}]{question,  }\item[{const std\+::string \&}]{answer }\end{DoxyParamCaption})}
+
+
+
+Cria um novo usuário no sistema de login. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & O nome de usuário do novo usuário. \\
+\hline
+{\em password} & A senha do novo usuário. \\
+\hline
+{\em email} & O email do novo usuário. \\
+\hline
+{\em question} & A pergunta de segurança do novo usuário. \\
+\hline
+{\em answer} & A resposta da pergunta de segurança do novo usuário. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true se o usuário foi criado com sucesso, false caso contrário. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLoginSystem_aea11f77c4c2db6b871ed973e6ece4b57}\label{classLoginSystem_aea11f77c4c2db6b871ed973e6ece4b57}} 
+\index{LoginSystem@{LoginSystem}!deleteUser@{deleteUser}}
+\index{deleteUser@{deleteUser}!LoginSystem@{LoginSystem}}
+\doxysubsubsection{\texorpdfstring{deleteUser()}{deleteUser()}}
+{\footnotesize\ttfamily bool Login\+System\+::delete\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Exclui o usuário atualmente logado do sistema de login. 
+
+\begin{DoxyReturn}{Returns}
+true se o usuário foi excluído com sucesso, false caso contrário. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLoginSystem_a629674ee4ee48c0dee102473300e2926}\label{classLoginSystem_a629674ee4ee48c0dee102473300e2926}} 
+\index{LoginSystem@{LoginSystem}!editUser@{editUser}}
+\index{editUser@{editUser}!LoginSystem@{LoginSystem}}
+\doxysubsubsection{\texorpdfstring{editUser()}{editUser()}}
+{\footnotesize\ttfamily bool Login\+System\+::edit\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Edita as informações do usuário atualmente logado. 
+
+\begin{DoxyReturn}{Returns}
+true se as informações foram editadas com sucesso, false caso contrário. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLoginSystem_ae84eafb9994a3717005b6215c37d3377}\label{classLoginSystem_ae84eafb9994a3717005b6215c37d3377}} 
+\index{LoginSystem@{LoginSystem}!findUserByUsername@{findUserByUsername}}
+\index{findUserByUsername@{findUserByUsername}!LoginSystem@{LoginSystem}}
+\doxysubsubsection{\texorpdfstring{findUserByUsername()}{findUserByUsername()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classUser}{User}} $\ast$ Login\+System\+::find\+User\+By\+Username (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{username }\end{DoxyParamCaption})}
+
+
+
+Verifica se um usuário com o nome de usuário fornecido já existe. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & O nome de usuário a ser verificado. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Um ponteiro para o usuário se encontrado, nullptr caso contrário. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLoginSystem_aa72da749a9eceedcc677afbdd82af270}\label{classLoginSystem_aa72da749a9eceedcc677afbdd82af270}} 
+\index{LoginSystem@{LoginSystem}!forgotPassword@{forgotPassword}}
+\index{forgotPassword@{forgotPassword}!LoginSystem@{LoginSystem}}
+\doxysubsubsection{\texorpdfstring{forgotPassword()}{forgotPassword()}}
+{\footnotesize\ttfamily bool Login\+System\+::forgot\+Password (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Recupera a senha do usuário caso tenha sido esquecida. 
+
+\begin{DoxyReturn}{Returns}
+true se a senha foi recuperada com sucesso, false caso contrário. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLoginSystem_aef26d7db58a7f9279c7941747704ab65}\label{classLoginSystem_aef26d7db58a7f9279c7941747704ab65}} 
+\index{LoginSystem@{LoginSystem}!getUsername@{getUsername}}
+\index{getUsername@{getUsername}!LoginSystem@{LoginSystem}}
+\doxysubsubsection{\texorpdfstring{getUsername()}{getUsername()}}
+{\footnotesize\ttfamily std\+::string Login\+System\+::get\+Username (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classLoginSystem_ad2f40958e73bf29b84e3f01ddc7d50e3}\label{classLoginSystem_ad2f40958e73bf29b84e3f01ddc7d50e3}} 
+\index{LoginSystem@{LoginSystem}!login@{login}}
+\index{login@{login}!LoginSystem@{LoginSystem}}
+\doxysubsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily bool Login\+System\+::login (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Realiza o login de um usuário no sistema de login. 
+
+\begin{DoxyReturn}{Returns}
+true se o login foi bem-\/sucedido, false caso contrário. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLoginSystem_a0e06adffe81f39617436eab29567a263}\label{classLoginSystem_a0e06adffe81f39617436eab29567a263}} 
+\index{LoginSystem@{LoginSystem}!logout@{logout}}
+\index{logout@{logout}!LoginSystem@{LoginSystem}}
+\doxysubsubsection{\texorpdfstring{logout()}{logout()}}
+{\footnotesize\ttfamily bool Login\+System\+::logout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Realiza o logout do usuário atual no sistema de login. 
+
+\begin{DoxyReturn}{Returns}
+true se o logout foi realizado com sucesso, false caso contrário. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLoginSystem_af6225af6267cc407bb7ee1d68a8a00a0}\label{classLoginSystem_af6225af6267cc407bb7ee1d68a8a00a0}} 
+\index{LoginSystem@{LoginSystem}!showUser@{showUser}}
+\index{showUser@{showUser}!LoginSystem@{LoginSystem}}
+\doxysubsubsection{\texorpdfstring{showUser()}{showUser()}}
+{\footnotesize\ttfamily bool Login\+System\+::show\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Exibe o nome de usuário do usuário atualmente logado. 
+
+\begin{DoxyReturn}{Returns}
+true se o nome de usuário foi exibido com sucesso, false caso contrário. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classLoginSystem_a196cc6a8690a586cc03363627df78fdc}\label{classLoginSystem_a196cc6a8690a586cc03363627df78fdc}} 
+\index{LoginSystem@{LoginSystem}!SaveFile@{SaveFile}}
+\index{SaveFile@{SaveFile}!LoginSystem@{LoginSystem}}
+\doxysubsubsection{\texorpdfstring{SaveFile}{SaveFile}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classSaveFile}{Save\+File}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classLoginSystem_a8c6d79afd71a17ec6a0408b38929b048}\label{classLoginSystem_a8c6d79afd71a17ec6a0408b38929b048}} 
+\index{LoginSystem@{LoginSystem}!\_users@{\_users}}
+\index{\_users@{\_users}!LoginSystem@{LoginSystem}}
+\doxysubsubsection{\texorpdfstring{\_users}{\_users}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, \mbox{\hyperlink{classUser}{User}}$>$ Login\+System\+::\+\_\+users\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classLoginSystem_a614ee6312b4700246d22d65453b19fb5}\label{classLoginSystem_a614ee6312b4700246d22d65453b19fb5}} 
+\index{LoginSystem@{LoginSystem}!currentUsername@{currentUsername}}
+\index{currentUsername@{currentUsername}!LoginSystem@{LoginSystem}}
+\doxysubsubsection{\texorpdfstring{currentUsername}{currentUsername}}
+{\footnotesize\ttfamily std\+::string Login\+System\+::current\+Username\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classLoginSystem_a7bbb0df743698c9b9e39506cdc1772a4}\label{classLoginSystem_a7bbb0df743698c9b9e39506cdc1772a4}} 
+\index{LoginSystem@{LoginSystem}!isLoggedIn@{isLoggedIn}}
+\index{isLoggedIn@{isLoggedIn}!LoginSystem@{LoginSystem}}
+\doxysubsubsection{\texorpdfstring{isLoggedIn}{isLoggedIn}}
+{\footnotesize\ttfamily bool Login\+System\+::is\+Logged\+In\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{login_8hpp}{login.\+hpp}}\item 
+\mbox{\hyperlink{login_8cpp}{login.\+cpp}}\end{DoxyCompactItemize}

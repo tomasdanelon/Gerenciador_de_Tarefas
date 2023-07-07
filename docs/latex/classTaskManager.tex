@@ -1,0 +1,147 @@
+\hypertarget{classTaskManager}{}\doxysection{Task\+Manager Class Reference}
+\label{classTaskManager}\index{TaskManager@{TaskManager}}
+
+
+Classe que gerencia as tarefas.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classTaskManager_a6357a02d5873963601738a41bcae4be7}{Add\+Task}} (const \mbox{\hyperlink{classTask}{Task}} \&task)
+\begin{DoxyCompactList}\small\item\em Adiciona uma tarefa. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classTaskManager_a8f6498483e4505c641697e444e61c3b7}{Add\+Notes}} (int task\+\_\+index, const std\+::string \&notes)
+\begin{DoxyCompactList}\small\item\em Adiciona notas a uma tarefa existente. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classTaskManager_a10d2886027575620743e8c9b8fd767d7}{Remove\+Task}} (int task\+\_\+index)
+\begin{DoxyCompactList}\small\item\em Remove uma tarefa. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTaskManager_a57b44ff20a9c64525d60dbd939d81d35}{List\+Tasks}} () const
+\begin{DoxyCompactList}\small\item\em Lista todas as tarefas. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTaskManager_aaf780a64e667c10665ec52014412852d}{Sort\+Tasks\+By\+Priority}} ()
+\begin{DoxyCompactList}\small\item\em Ordena as tarefas por prioridade. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTaskManager_af3adb71858e5feb2f46aa14f7aec9c53}{Sort\+Tasks\+By\+Due\+Date}} ()
+\begin{DoxyCompactList}\small\item\em Ordena as tarefas por data de vencimento. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTaskManager_acd51822c127f38d3e6ed23a27afb74d9}{use}} (\mbox{\hyperlink{classTaskManager}{Task\+Manager}} \&task\+\_\+manager)
+\begin{DoxyCompactList}\small\item\em Função para uso do \mbox{\hyperlink{classTaskManager}{Task\+Manager}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classTask}{Task}} $>$ \mbox{\hyperlink{classTaskManager_a4a044cb0ca5c8f43eed2ef0892b8e9ce}{tasks\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe que gerencia as tarefas. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classTaskManager_a8f6498483e4505c641697e444e61c3b7}\label{classTaskManager_a8f6498483e4505c641697e444e61c3b7}} 
+\index{TaskManager@{TaskManager}!AddNotes@{AddNotes}}
+\index{AddNotes@{AddNotes}!TaskManager@{TaskManager}}
+\doxysubsubsection{\texorpdfstring{AddNotes()}{AddNotes()}}
+{\footnotesize\ttfamily bool Task\+Manager\+::\+Add\+Notes (\begin{DoxyParamCaption}\item[{int}]{task\+\_\+index,  }\item[{const std\+::string \&}]{notes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adiciona notas a uma tarefa existente. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+\_\+index} & O índice da tarefa na lista. \\
+\hline
+{\em notes} & As notas a serem adicionadas. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true se as notas foram adicionadas com sucesso, false caso contrário. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTaskManager_a6357a02d5873963601738a41bcae4be7}\label{classTaskManager_a6357a02d5873963601738a41bcae4be7}} 
+\index{TaskManager@{TaskManager}!AddTask@{AddTask}}
+\index{AddTask@{AddTask}!TaskManager@{TaskManager}}
+\doxysubsubsection{\texorpdfstring{AddTask()}{AddTask()}}
+{\footnotesize\ttfamily void Task\+Manager\+::\+Add\+Task (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classTask}{Task}} \&}]{task }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adiciona uma tarefa. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task} & A tarefa a ser adicionada. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classTaskManager_a57b44ff20a9c64525d60dbd939d81d35}\label{classTaskManager_a57b44ff20a9c64525d60dbd939d81d35}} 
+\index{TaskManager@{TaskManager}!ListTasks@{ListTasks}}
+\index{ListTasks@{ListTasks}!TaskManager@{TaskManager}}
+\doxysubsubsection{\texorpdfstring{ListTasks()}{ListTasks()}}
+{\footnotesize\ttfamily void Task\+Manager\+::\+List\+Tasks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Lista todas as tarefas. 
+
+\mbox{\Hypertarget{classTaskManager_a10d2886027575620743e8c9b8fd767d7}\label{classTaskManager_a10d2886027575620743e8c9b8fd767d7}} 
+\index{TaskManager@{TaskManager}!RemoveTask@{RemoveTask}}
+\index{RemoveTask@{RemoveTask}!TaskManager@{TaskManager}}
+\doxysubsubsection{\texorpdfstring{RemoveTask()}{RemoveTask()}}
+{\footnotesize\ttfamily bool Task\+Manager\+::\+Remove\+Task (\begin{DoxyParamCaption}\item[{int}]{task\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Remove uma tarefa. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+\_\+index} & O índice da tarefa na lista. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true se a tarefa foi removida com sucesso, false caso contrário. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTaskManager_af3adb71858e5feb2f46aa14f7aec9c53}\label{classTaskManager_af3adb71858e5feb2f46aa14f7aec9c53}} 
+\index{TaskManager@{TaskManager}!SortTasksByDueDate@{SortTasksByDueDate}}
+\index{SortTasksByDueDate@{SortTasksByDueDate}!TaskManager@{TaskManager}}
+\doxysubsubsection{\texorpdfstring{SortTasksByDueDate()}{SortTasksByDueDate()}}
+{\footnotesize\ttfamily void Task\+Manager\+::\+Sort\+Tasks\+By\+Due\+Date (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Ordena as tarefas por data de vencimento. 
+
+\mbox{\Hypertarget{classTaskManager_aaf780a64e667c10665ec52014412852d}\label{classTaskManager_aaf780a64e667c10665ec52014412852d}} 
+\index{TaskManager@{TaskManager}!SortTasksByPriority@{SortTasksByPriority}}
+\index{SortTasksByPriority@{SortTasksByPriority}!TaskManager@{TaskManager}}
+\doxysubsubsection{\texorpdfstring{SortTasksByPriority()}{SortTasksByPriority()}}
+{\footnotesize\ttfamily void Task\+Manager\+::\+Sort\+Tasks\+By\+Priority (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Ordena as tarefas por prioridade. 
+
+\mbox{\Hypertarget{classTaskManager_acd51822c127f38d3e6ed23a27afb74d9}\label{classTaskManager_acd51822c127f38d3e6ed23a27afb74d9}} 
+\index{TaskManager@{TaskManager}!use@{use}}
+\index{use@{use}!TaskManager@{TaskManager}}
+\doxysubsubsection{\texorpdfstring{use()}{use()}}
+{\footnotesize\ttfamily void Task\+Manager\+::use (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classTaskManager}{Task\+Manager}} \&}]{task\+\_\+manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Função para uso do \mbox{\hyperlink{classTaskManager}{Task\+Manager}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+\_\+manager} & O gerenciador de tarefas. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classTaskManager_a4a044cb0ca5c8f43eed2ef0892b8e9ce}\label{classTaskManager_a4a044cb0ca5c8f43eed2ef0892b8e9ce}} 
+\index{TaskManager@{TaskManager}!tasks\_@{tasks\_}}
+\index{tasks\_@{tasks\_}!TaskManager@{TaskManager}}
+\doxysubsubsection{\texorpdfstring{tasks\_}{tasks\_}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classTask}{Task}}$>$ Task\+Manager\+::tasks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{task__manager_8cpp}{task\+\_\+manager.\+cpp}}\end{DoxyCompactItemize}
